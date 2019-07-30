@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="mysong">
+        <button type="submit">Upload</button>
+    </form>
+    <div>
+        {% for song in songs %}
+            <p>{{song.name}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
