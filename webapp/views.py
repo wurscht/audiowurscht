@@ -4,14 +4,14 @@ from webapp.models import Song
 import vlc
 
 
-def IndexView(request):
+def UploadView(request):
     if request.method == 'POST':
         song = Song(
             name=str(request.FILES['mysong']),
             song=request.FILES['mysong']
         )
         song.save()
-        return redirect('/')
+        return redirect('/upload')
 
     return render(request, 'song_upload.html')
 
