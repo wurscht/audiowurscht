@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {% for song in songs %}
+        <div class="songlist">
+            <p>{{song.name}}</p>
+            <button class="play" type="submit" name="play" value={{song.id}}>Play</button>
+            <button class="stop" type="submit" name="stop" value={{song.id}}>Stop</button>
+        </div>
+        {% endfor %}
+    </div>
+</form>
+{% endblock %}
