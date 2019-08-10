@@ -5,7 +5,7 @@ import vlc
 
 
 def MenuView(request):
-    return render(request, 'menu.html')
+    return render(request, 'index.html')
 
 
 def UploadView(request):
@@ -15,7 +15,7 @@ def UploadView(request):
             song=request.FILES['mysong']
         )
         song.save()
-        return redirect('/upload')
+        return redirect('upload')
 
     return render(request, 'song_upload.html')
 

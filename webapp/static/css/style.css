@@ -4,9 +4,15 @@
 }
 
 .menu {
+    display: flex;
+    align-items: baseline;
+    padding: 0 0 20px 0;
+    margin: 0 0 20px 0;
 }
 
-.menu-item {
+.menuitem {
+    display: flex;
+    margin: 0 0 0 20px;
 }
 
 .songlist {
