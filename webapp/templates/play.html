@@ -6,9 +6,15 @@
     <div>
         {% for song in songs %}
         <div class="songlist">
-            <p>{{song.name}}</p>
-            <button class="play" type="submit" name="play" value={{song.id}}>Play</button>
-            <button class="stop" type="submit" name="stop" value={{song.id}}>Stop</button>
+            <div class="listitem">
+                <p>{{song.name}}</p>
+            </div>
+            <div class="listitem">
+                <button class="play" type="submit" name="play" value={{song.id}}>Play</button>
+            </div>
+            <div class="listitem">
+                <button class="stop" type="submit" name="stop" value={{song.id}}>Stop</button>
+            </div>
         </div>
         {% endfor %}
     </div>

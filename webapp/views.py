@@ -4,6 +4,10 @@ from webapp.models import Song
 import vlc
 
 
+def MenuView(request):
+    return render(request, 'menu.html')
+
+
 def UploadView(request):
     if request.method == 'POST':
         song = Song(
