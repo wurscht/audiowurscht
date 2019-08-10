@@ -10,10 +10,13 @@
                 <p>{{song.name}}</p>
             </div>
             <div class="listitem">
-                <button class="play" type="submit" name="play" value={{song.id}}>Play</button>
+                <button type="submit" name="play" value={{song.id}}>Play</button>
             </div>
             <div class="listitem">
-                <button class="stop" type="submit" name="stop" value={{song.id}}>Stop</button>
+                <button type="submit" name="stop" value={{song.id}}>Stop</button>
+            </div>
+            <div class="listitem">
+                <button type="submit" name="pause" value={{song.id}}>Pause</button>
             </div>
         </div>
         {% endfor %}

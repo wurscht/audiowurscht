@@ -8,14 +8,12 @@
     </head>
     <body>
         <div class="container">
-            <div>
-                <div class='menu'>
-                    <h1 class='menuitem'>Audiowurscht</h1>
-                    <a class='menuitem' href="/upload">Upload songs</a>
-                    <a class='menuitem' href="/play">Play songs</a>
-                </div>
-                {% block content %}{% endblock %}
+            <div class="menu">
+                <a href="/"><h1 class="menuitem" style="color: white;">Audiowurscht</h1></a>
+                <a class="menuitem" href="/upload">Upload songs</a>
+                <a class="menuitem" href="/play">Play songs</a>
             </div>
+            {% block content %}{% endblock %}
         </div>
     </body>
 </html>

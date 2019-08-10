@@ -3,3 +3,4 @@ psycopg2-binary
 docker-compose
 pdbpp
 python-vlc
+black

@@ -5,14 +5,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('webapp', '0002_song_song'),
-    ]
+    dependencies = [("webapp", "0002_song_song")]
 
     operations = [
         migrations.AlterField(
-            model_name='song',
-            name='song',
-            field=models.FileField(upload_to='media/'),
-        ),
+            model_name="song", name="song", field=models.FileField(upload_to="media/")
+        )
     ]

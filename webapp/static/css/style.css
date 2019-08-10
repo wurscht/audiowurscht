@@ -1,6 +1,13 @@
+html, body {
+    background-color: turquoise;
+    height: 100%;
+}
+
 .container {
     width: 900px;
-    margin: 0 auto 0 auto;
+    margin: -10px auto 0 auto;
+    background-color: deepskyblue;
+    height: 100%;
 }
 
 .menu {
@@ -8,11 +15,24 @@
     align-items: baseline;
     padding: 0 0 20px 0;
     margin: 0 0 20px 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.menu a {
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.menu a:hover {
+    background-color: darkslategrey;
+    color: black;
 }
 
 .menuitem {
     display: flex;
     margin: 0 0 0 20px;
+    color: white;
 }
 
 .songlist {
@@ -42,4 +62,3 @@ button:hover {
     background: green;
     color: black;
 }
-
