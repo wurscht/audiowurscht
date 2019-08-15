@@ -62,3 +62,11 @@ button:hover {
     background: green;
     color: black;
 }
+
+td {
+    padding: 10px;
+}
+
+tr {
+    padding: 10px;
+}

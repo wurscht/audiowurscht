@@ -1,5 +1,4 @@
-
-.PHONY: start-app start-server
+.PHONY: docker start
 
 docker: ## Start the docker environment
 	@docker-compose up

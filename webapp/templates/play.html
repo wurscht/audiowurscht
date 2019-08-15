@@ -4,22 +4,41 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div>
-        {% for song in songs %}
         <div class="songlist">
             <div class="listitem">
-                <p>{{song.name}}</p>
-            </div>
-            <div class="listitem">
-                <button type="submit" name="play" value={{song.id}}>Play</button>
-            </div>
-            <div class="listitem">
-                <button type="submit" name="stop" value={{song.id}}>Stop</button>
-            </div>
-            <div class="listitem">
-                <button type="submit" name="pause" value={{song.id}}>Pause</button>
+                <table>
+                    <tr>
+                        <th>Artist</th>
+                        <th>Title</th>
+                        <th>Album</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for song in songs %}
+                    <tr>
+                        <td><p>{{song.artist}}</p></td>
+                        <td><p>{{song.album}}</p></td>
+                        <td><p>{{song.title}}</p></td>
+                        <td>
+                            <div class="listitem">
+                                <button type="submit" name="play" value={{song.id}}>Play</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="listitem">
+                                <button type="submit" name="stop" value={{song.id}}>Stop</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="listitem">
+                                <button type="submit" name="pause" value={{song.id}}>Pause</button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
-        {% endfor %}
     </div>
 </form>
 {% endblock %}

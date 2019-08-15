@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from webapp.models import Song
+from datetime import datetime
 import vlc
+import mutagen
 
 
 def MenuView(request):
@@ -10,7 +12,14 @@ def MenuView(request):
 
 def UploadView(request):
     if request.method == "POST":
-        song = Song(name=str(request.FILES["mysong"]), song=request.FILES["mysong"])
+        song_info = mutagen.File(request.FILES["mysong"])
+        song = Song(
+            title="".join(song_info["TIT2"].text),
+            artist="".join(song_info["TPE1"].text),
+            album="".join(song_info["TALB"].text),
+            path=request.FILES["mysong"],
+            tracknumber="".join(song_info["TRCK"].text)
+        )
         song.save()
         return redirect("upload")
 
