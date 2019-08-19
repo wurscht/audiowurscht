@@ -1,13 +1,81 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from webapp.models import Song
-from datetime import datetime
+import os
+import base64
 import vlc
 import mutagen
+from django.shortcuts import render, redirect
+from django.views.generic import FormView
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
+from webapp.models import Song, Profile
+from webapp.forms import RegistrationForm
+from django.views import generic
 
 
 def MenuView(request):
     return render(request, "index.html")
+
+
+class RegistrationView(FormView):
+    model = User
+    template_name = 'registration/register.html'
+    form_class = RegistrationForm
+    success_url = '/send_confirmation_mail'
+
+    def form_valid(self, form):
+        user = User.objects.create_user(form.data['username'],
+                                        form.data['email'],
+                                        form.data['password1'],
+                                        first_name=form.data['first_name'],
+                                        last_name=form.data['last_name'])
+        user.is_active = False
+        user.save()
+
+        if user is not None:
+            self.generate_profile(user)
+
+        return super(RegistrationView, self).form_valid(form)
+
+    def generate_key(self):
+        return base64.b32encode(os.urandom(7))[:10].lower()
+
+    def generate_profile(self, user):
+        profile = Profile(key=self.generate_key(), user=user)
+        profile.save()
+        send_mail(
+            'Mate Counter account confirmation',
+            """
+            Hello,
+            please click this link to activate your Mate Counter account:
+            {0}/registration_done/{1}
+            Sincerely,
+            The Mate Counter Team
+            """.format(settings.SITE_URL, profile.key.decode("utf-8")),
+            'info@audiowurscht.com',
+            [user.email],
+            fail_silently=False,
+        )
+
+
+class RegistrationDoneView(generic.TemplateView):
+    template_name = 'registration/registration_done.html'
+
+    def get_context_data(request, key):
+        matches = Profile.objects.filter(key=key.encode("utf-8"))
+        if matches.exists():
+            profile = matches.first()
+            if profile.user.is_active:
+                request.template_name = (
+                    'registration/user_is_already_active.html')
+            else:
+                profile.user.is_active = True
+                profile.user.save()
+        else:
+            request.template_name = 'registration/registration_failed.html'
+
+
+def send_confirmation_mail_view(request):
+    return render(request, "registration/send_confirmation_mail.html")
 
 
 def UploadView(request):
@@ -21,7 +89,7 @@ def UploadView(request):
             tracknumber="".join(song_info["TRCK"].text)
         )
         song.save()
-        return redirect("upload")
+        redirect("upload")
 
     return render(request, "song_upload.html")
 

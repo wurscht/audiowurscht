@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div>
+        <h1>
+            <p>Registration</p>
+        </h1>
+    </div>
+    <div>
+        <form action="/register/" method="post">
+            <div>
+                {% csrf_token %}
+                {{ form }}
+
+                <input type="submit" id="registerbutton" class="buttons" value="Register" />
+            </div>
+        </form>
+    </div>
+    <form>
+        <input id="backbutton" type="button" value="Back"/>
+    </form>
+{% endblock %}

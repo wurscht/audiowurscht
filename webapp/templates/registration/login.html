@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div>
+        <form method="POST">
+        {% csrf_token %}
+            <div class="login">
+                <div>
+                    {{ form }}
+                </div>
+                <div>
+                    <button type="submit" id="login" class="btn btn-primary">
+                        Login
+                    </button>
+                </div>
+                <div>
+                    <a id="forgotpass" href="/password_reset/">Forgot password?</a>
+                </div>
+            </div>
+        </form>
+        <form>
+            <input
+            id="backbutton"
+            type="button"
+            value="Back"
+            onclick="history.go(-1)"
+            />
+        </form>
+    </div>
+{% endblock %}
+

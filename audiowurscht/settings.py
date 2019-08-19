@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+SITE_URL = 'http://localhost:8000'
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -122,3 +124,15 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+LOGIN_REDIRECT_URL = ''
+
+# Mailserver login settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'Audiowurscht <info@audiowurscht.com>'

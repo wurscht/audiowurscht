@@ -1,16 +1,9 @@
-from django.contrib import admin
-from django.urls import path
-from webapp import views
-from django.conf import settings
+from django.conf.urls import url, include
 from django.conf.urls.static import static
-
+from django.conf import settings
+from django.contrib import admin
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", views.MenuView, name="menu"),
-    path("upload/", views.UploadView, name="upload"),
-    path("play/", views.PlayView, name="play"),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url("", include("webapp.urls")),
+    url('admin/', admin.site.urls),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

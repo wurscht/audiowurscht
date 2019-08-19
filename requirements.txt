@@ -5,3 +5,4 @@ pdbpp
 python-vlc
 black
 mutagen
+mailcatcher
