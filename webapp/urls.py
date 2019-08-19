@@ -30,6 +30,11 @@ urlpatterns = [
         name="login"
     ),
     path(
+        "logout/",
+        views.LogoutView,
+        name="logout"
+    ),
+    path(
         "password_change/",
         auth_views.PasswordChangeView.as_view(),
         name="passwordchange"

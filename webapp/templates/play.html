@@ -6,6 +6,7 @@
     <div>
         <div class="songlist">
             <div class="listitem">
+                {% if my_songs %}
                 <table>
                     <tr>
                         <th>Artist</th>
@@ -14,28 +15,31 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    {% for song in songs %}
-                    <tr>
-                        <td><p>{{song.artist}}</p></td>
-                        <td><p>{{song.album}}</p></td>
-                        <td><p>{{song.title}}</p></td>
-                        <td>
-                            <div class="listitem">
-                                <button type="submit" name="play" value={{song.id}}>Play</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="listitem">
-                                <button type="submit" name="stop" value={{song.id}}>Stop</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="listitem">
-                                <button type="submit" name="pause" value={{song.id}}>Pause</button>
-                            </div>
-                        </td>
-                    </tr>
+                    {% for song in my_songs %}
+                        <tr>
+                            <td><p>{{song.artist}}</p></td>
+                            <td><p>{{song.album}}</p></td>
+                            <td><p>{{song.title}}</p></td>
+                            <td>
+                                <div class="listitem">
+                                    <button type="submit" name="play" value={{song.id}}>Play</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="listitem">
+                                    <button type="submit" name="stop" value={{song.id}}>Stop</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="listitem">
+                                    <button type="submit" name="pause" value={{song.id}}>Pause</button>
+                                </div>
+                            </td>
+                        </tr>
                     {% endfor %}
+                {% else %}
+                    <p>You didn't upload any songs yet. Go on an <a href="/upload">upload</a> some.</p>
+                {% endif %}
                 </table>
             </div>
         </div>

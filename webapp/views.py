@@ -4,6 +4,7 @@ import vlc
 import mutagen
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
@@ -78,16 +79,25 @@ def send_confirmation_mail_view(request):
     return render(request, "registration/send_confirmation_mail.html")
 
 
+def LogoutView(request):
+    logout(request)
+    return redirect("/login")
+
+
 def UploadView(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login_error.html')
+    current_user = request.user
     if request.method == "POST":
         song_info = mutagen.File(request.FILES["mysong"])
-        song = Song(
+        song = Song.objects.create(
             title="".join(song_info["TIT2"].text),
             artist="".join(song_info["TPE1"].text),
             album="".join(song_info["TALB"].text),
             path=request.FILES["mysong"],
             tracknumber="".join(song_info["TRCK"].text)
         )
+        song.user.add(current_user)
         song.save()
         redirect("upload")
 
@@ -95,17 +105,25 @@ def UploadView(request):
 
 
 def PlayView(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login_error.html')
+    current_user = request.user
+    my_songs = current_user.user_songs.all()
     songs = Song.objects.all()
 
     if request.POST.get("play"):
         song_id = request.POST.get("play")
         song = Song.objects.get(id=song_id)
         global player
-        player = vlc.MediaPlayer(song.song.path)
+        player = vlc.MediaPlayer(song.path.path)
         player.play()
     if request.POST.get("stop"):
         player.stop()
     if request.POST.get("pause"):
         player.pause()
 
-    return render(request, "play.html", {"songs": songs})
+    return render(request, "play.html", {
+        "songs": songs,
+        "my_songs": my_songs
+        }
+    )

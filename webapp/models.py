@@ -11,7 +11,7 @@ class Profile(models.Model):
 
 
 class Song(models.Model):
-    user = models.ManyToManyField(User)
+    user = models.ManyToManyField(User, related_name="user_songs")
     title = models.CharField(max_length=100, default="unknown")
     artist = models.CharField(max_length=100, default="unknown")
     album = models.CharField(max_length=100, default="unknown")
@@ -19,4 +19,4 @@ class Song(models.Model):
     tracknumber = models.CharField(max_length=100, default="unknown")
 
     def __str__(self):
-        return self.name
+        return self.title
