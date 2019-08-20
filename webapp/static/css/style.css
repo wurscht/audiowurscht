@@ -35,6 +35,12 @@ html, body {
     color: white;
 }
 
+.logged_in {
+    font-size: 12px;
+    margin: 0 0 0 20px;
+    color: white;
+}
+
 .songlist {
     display: flex;
     flex-wrap: nowrap;

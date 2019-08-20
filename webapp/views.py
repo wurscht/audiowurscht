@@ -14,7 +14,10 @@ from django.views import generic
 
 
 def MenuView(request):
-    return render(request, "index.html")
+    current_user = request.user
+    return render(request, "index.html", {
+        "user": current_user
+    })
 
 
 class RegistrationView(FormView):
@@ -121,6 +124,11 @@ def PlayView(request):
         player.stop()
     if request.POST.get("pause"):
         player.pause()
+
+    if request.POST.get("delete"):
+        song_id = request.POST.get("delete")
+        song = Song.objects.get(id=song_id)
+        song.delete()
 
     return render(request, "play.html", {
         "songs": songs,

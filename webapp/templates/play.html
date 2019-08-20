@@ -14,6 +14,7 @@
                         <th>Album</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     {% for song in my_songs %}
                         <tr>
@@ -33,6 +34,11 @@
                             <td>
                                 <div class="listitem">
                                     <button type="submit" name="pause" value={{song.id}}>Pause</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="listitem">
+                                    <button type="submit" name="delete" value={{song.id}}>Delete</button>
                                 </div>
                             </td>
                         </tr>
