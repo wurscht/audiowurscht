@@ -9,6 +9,7 @@
                 {% if my_songs %}
                 <table>
                     <tr>
+                        <th>Picture</th>
                         <th>Artist</th>
                         <th>Title</th>
                         <th>Album</th>
@@ -18,9 +19,10 @@
                     </tr>
                     {% for song in my_songs %}
                         <tr>
+                            <td><img class="band_picture" src="{{song.picture}}"></td>
                             <td><p>{{song.artist}}</p></td>
-                            <td><p>{{song.album}}</p></td>
                             <td><p>{{song.title}}</p></td>
+                            <td><p>{{song.album}}</p></td>
                             <td>
                                 <div class="listitem">
                                     <button type="submit" name="play" value={{song.id}}>Play</button>

@@ -6,3 +6,4 @@ python-vlc
 black
 mutagen
 mailcatcher
+discogs_client

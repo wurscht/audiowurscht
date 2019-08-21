@@ -2,6 +2,7 @@ import os
 import base64
 import vlc
 import mutagen
+import discogs_client
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from django.contrib.auth import logout
@@ -90,15 +91,19 @@ def LogoutView(request):
 def UploadView(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login_error.html')
+    discogs = discogs_client.Client('ExampleApplication/0.1', user_token="FLDeuZyRaYLvakXhVNTUgMfTWmBnlabfrBFhGvaM")
     current_user = request.user
     if request.method == "POST":
         song_info = mutagen.File(request.FILES["mysong"])
+        results = discogs.search("".join(song_info["TPE1"].text), type='artist')
+        band_pic = results[0].images[0]["uri"]
         song = Song.objects.create(
             title="".join(song_info["TIT2"].text),
             artist="".join(song_info["TPE1"].text),
             album="".join(song_info["TALB"].text),
             path=request.FILES["mysong"],
-            tracknumber="".join(song_info["TRCK"].text)
+            tracknumber="".join(song_info["TRCK"].text),
+            picture=band_pic
         )
         song.user.add(current_user)
         song.save()

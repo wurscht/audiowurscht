@@ -17,6 +17,7 @@ class Song(models.Model):
     album = models.CharField(max_length=100, default="unknown")
     path = models.FileField(upload_to="media/")
     tracknumber = models.CharField(max_length=100, default="unknown")
+    picture = models.CharField(max_length=1000, default="no picture", null=True)
 
     def __str__(self):
         return self.title
