@@ -69,6 +69,17 @@ button:hover {
     color: black;
 }
 
+.play_button {
+    display: block;
+    width: 40px;
+    height: 25px;
+    background: #4E9CAF;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
 td {
     padding: 10px;
 }

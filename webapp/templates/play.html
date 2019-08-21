@@ -25,22 +25,30 @@
                             <td><p>{{song.album}}</p></td>
                             <td>
                                 <div class="listitem">
-                                    <button type="submit" name="play" value={{song.id}}>Play</button>
+                                    <button class="play_button" type="submit" name="play" value={{song.id}}>
+                                        <i class="fa fa-play"></i>
+                                    </button>
                                 </div>
                             </td>
                             <td>
                                 <div class="listitem">
-                                    <button type="submit" name="stop" value={{song.id}}>Stop</button>
+                                    <button class="play_button" type="submit" name="stop" value={{song.id}}>
+                                        <i class="fa fa-stop" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </td>
                             <td>
                                 <div class="listitem">
-                                    <button type="submit" name="pause" value={{song.id}}>Pause</button>
+                                    <button class="play_button" type="submit" name="pause" value={{song.id}}>
+                                        <i class="fa fa-pause" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </td>
                             <td>
                                 <div class="listitem">
-                                    <button type="submit" name="delete" value={{song.id}}>Delete</button>
+                                    <button class="play_button" type="submit" name="delete" value={{song.id}}>
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
