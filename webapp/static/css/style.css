@@ -3,7 +3,7 @@ html, body {
     height: 100%;
 }
 
-h1, h2, h3, h4, p {
+.menuitem, th, h1, h2, h3, h4, p {
     font-family: 'Nunito', sans-serif;
 }
 
