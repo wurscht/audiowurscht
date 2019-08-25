@@ -95,8 +95,10 @@ def UploadView(request):
     current_user = request.user
     if request.method == "POST":
         song_info = mutagen.File(request.FILES["mysong"])
-        results = discogs.search("".join(song_info["TPE1"].text), type='artist')
+        artist = "".join(song_info["TPE1"].text)
+        results = discogs.search(artist.split("/")[0], type='artist')
         band_pic = results[0].images[0]["uri"]
+
         song = Song.objects.create(
             title="".join(song_info["TIT2"].text),
             artist="".join(song_info["TPE1"].text),
@@ -105,6 +107,7 @@ def UploadView(request):
             tracknumber="".join(song_info["TRCK"].text),
             picture=band_pic
         )
+
         song.user.add(current_user)
         song.save()
         redirect("upload")

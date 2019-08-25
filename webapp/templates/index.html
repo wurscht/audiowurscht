@@ -6,12 +6,13 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{% static 'font_awesome/fontawesome.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
         <title>Audiowurscht</title>
     </head>
     <body>
         <div class="container">
             <div class="menu">
-                <a href="/"><h1 class="menuitem" style="color: white;">Audiowurscht</h1></a>
+                <a class="menuitem" href="/"><img src="../static/images/audiowurscht_logo.png" width="80%"></a>
                 <a class="menuitem" href="/upload">Upload songs</a>
                 <a class="menuitem" href="/play">Play songs</a>
                 {% if request.user.is_authenticated %}
