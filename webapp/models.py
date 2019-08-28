@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     key = models.CharField(max_length=30, unique=True, default="key")
+    picture = models.FileField(upload_to="media/profile_pictures")
 
     def __str__(self):
         return self.user.username

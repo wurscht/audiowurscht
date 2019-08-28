@@ -7,7 +7,7 @@ from webapp.forms import LoginForm
 
 
 urlpatterns = [
-    path("", views.MenuView, name="menu"),
+    path("", views.home_view, name="menu"),
     path(
         "register/",
         views.RegistrationView.as_view(),
@@ -31,7 +31,7 @@ urlpatterns = [
     ),
     path(
         "logout/",
-        views.LogoutView,
+        views.logout_view,
         name="logout"
     ),
     path(
@@ -74,8 +74,9 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="passwordresetcomplete"
     ),
-    path("upload/", views.UploadView, name="upload"),
-    path("play/", views.PlayView, name="play"),
+    path("upload/", views.upload_view, name="upload"),
+    path("play/", views.play_view, name="play"),
+    path("profile/<username>", views.profile_view, name="profile")
 ]
 
 if settings.DEBUG:

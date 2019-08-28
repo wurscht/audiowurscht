@@ -11,10 +11,11 @@ from django.core.mail import send_mail
 from django.conf import settings
 from webapp.models import Song, Profile
 from webapp.forms import RegistrationForm
+from audiowurscht import settings as general_settings
 from django.views import generic
 
 
-def MenuView(request):
+def home_view(request):
     current_user = request.user
     return render(request, "index.html", {
         "user": current_user
@@ -83,12 +84,12 @@ def send_confirmation_mail_view(request):
     return render(request, "registration/send_confirmation_mail.html")
 
 
-def LogoutView(request):
+def logout_view(request):
     logout(request)
     return redirect("/login")
 
 
-def UploadView(request):
+def upload_view(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login_error.html')
     discogs = discogs_client.Client('ExampleApplication/0.1', user_token="FLDeuZyRaYLvakXhVNTUgMfTWmBnlabfrBFhGvaM")
@@ -115,7 +116,7 @@ def UploadView(request):
     return render(request, "song_upload.html")
 
 
-def PlayView(request):
+def play_view(request):
     if not request.user.is_authenticated:
         return render(request, 'registration/login_error.html')
     current_user = request.user
@@ -129,9 +130,15 @@ def PlayView(request):
         player = vlc.MediaPlayer(song.path.path)
         player.play()
     if request.POST.get("stop"):
-        player.stop()
+        try:
+            player.stop()
+        except NameError as e:
+            print(e)
     if request.POST.get("pause"):
-        player.pause()
+        try:
+            player.pause()
+        except NameError as e:
+            print(e)
 
     if request.POST.get("delete"):
         song_id = request.POST.get("delete")
@@ -141,5 +148,29 @@ def PlayView(request):
     return render(request, "play.html", {
         "songs": songs,
         "my_songs": my_songs
+        }
+    )
+
+
+def profile_view(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return render(request, 'no_profile_available.html')
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login_error.html')
+    current_user = request.user
+    try:
+        profile = Profile.objects.get(user_id=user.id)
+    except Profile.DoesNotExist:
+        return render(request, 'no_profile_available.html')
+
+    if request.method == "POST":
+        profile.picture = request.FILES["mypicture"]
+        profile.save()
+
+    return render(request, "profile.html", {
+        "user": current_user,
+        "profile": profile
         }
     )

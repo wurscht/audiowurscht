@@ -94,3 +94,13 @@ tr {
 .band_picture {
     width: 100%;
 }
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-items {
+    display: flex;
+}

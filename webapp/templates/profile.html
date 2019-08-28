@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="profile-content">
+        {% if profile.picture %}
+            <img src="/media/{{ profile.picture }}" style="width:30%">
+        {% else %}
+            <img src="/media/media/profile_pictures/default.png" style="width:30%">
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="mypicture">
+            <button type="submit">Upload</button>
+        </form>
+        <a href="/password_change">Change Password</a>
+        <p>Username: {{ user.username }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>E-Mail: {{ user.email }}</p>
+    </div>
+{% endblock %}
