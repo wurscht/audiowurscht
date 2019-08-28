@@ -1,4 +1,5 @@
 import pytest
+from audiowurscht import settings
 
 
 @pytest.fixture(scope='session')

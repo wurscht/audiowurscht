@@ -8,3 +8,4 @@ mutagen
 mailcatcher
 discogs_client
 pytest-django
+pytest-cov
